@@ -1,0 +1,105 @@
+<svg viewBox="0 0 900 460" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <rect width="900" height="460" fill="#f8fafc"/>
+
+  <text x="450" y="32" font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="700" fill="#1e293b" text-anchor="middle">Decision Matrix vs Decision Table</text>
+  <text x="450" y="55" font-family="system-ui, -apple-system, sans-serif" font-size="13" fill="#64748b" text-anchor="middle">The right choice depends on row count, match type, and latency requirements</text>
+
+  <!-- Matrix column -->
+  <g filter="url(#shadow)">
+    <rect x="40" y="85" width="390" height="340" rx="14" fill="#bfdbfe" stroke="#3b82f6" stroke-width="2"/>
+    <text x="235" y="115" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="700" fill="#1e40af" text-anchor="middle">Decision Matrix</text>
+    <text x="235" y="135" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#475569" text-anchor="middle">Single-row exact match. Fast. Preferred for most rules.</text>
+  </g>
+
+  <!-- Matrix visual -->
+  <g filter="url(#shadow)">
+    <rect x="65" y="155" width="340" height="100" rx="8" fill="#ffffff" stroke="#3b82f6" stroke-width="1.5"/>
+    <!-- Header -->
+    <rect x="65" y="155" width="340" height="28" rx="8" fill="#dbeafe"/>
+    <text x="120" y="173" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#1e40af" text-anchor="middle">Tier</text>
+    <text x="200" y="173" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#1e40af" text-anchor="middle">Tenure Range</text>
+    <text x="280" y="173" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#1e40af" text-anchor="middle">MA Factor</text>
+    <text x="360" y="173" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#1e40af" text-anchor="middle">Reason Code</text>
+    <!-- Row 1 -->
+    <text x="120" y="202" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#1e40af" text-anchor="middle">Platinum</text>
+    <text x="200" y="202" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#1e40af" text-anchor="middle">90+ days</text>
+    <text x="280" y="202" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#1e40af" text-anchor="middle">0.90</text>
+    <text x="360" y="202" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#1e40af" text-anchor="middle">MA-001</text>
+    <!-- Row 2 -->
+    <text x="120" y="228" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#1e40af" text-anchor="middle">Gold</text>
+    <text x="200" y="228" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#1e40af" text-anchor="middle">30-89 days</text>
+    <text x="280" y="228" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#1e40af" text-anchor="middle">0.75</text>
+    <text x="360" y="228" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#1e40af" text-anchor="middle">MA-002</text>
+    <!-- Row 3 -->
+    <text x="120" y="254" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#1e40af" text-anchor="middle">Silver</text>
+    <text x="200" y="254" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#1e40af" text-anchor="middle">&lt;30 days</text>
+    <text x="280" y="254" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#1e40af" text-anchor="middle">0.60</text>
+    <text x="360" y="254" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#1e40af" text-anchor="middle">MA-003</text>
+  </g>
+
+  <!-- Matrix properties -->
+  <g filter="url(#shadow)">
+    <rect x="65" y="270" width="340" height="140" rx="8" fill="#ffffff" stroke="#3b82f6" stroke-width="1"/>
+    <text x="85" y="294" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#1e40af">Input columns: 2 (Tier, Tenure Range)</text>
+    <text x="85" y="316" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#1e40af">Output columns: 2 (MA Factor, Reason Code)</text>
+    <text x="85" y="338" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#1e40af">Match type: Exact on all input columns</text>
+    <text x="85" y="360" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#1e40af">Row scan: Stops at first match</text>
+    <text x="85" y="382" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#1e40af">Performance: Fast up to ~100k rows</text>
+    <text x="85" y="400" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#1e40af">Use when: Outcome determined by one row</text>
+  </g>
+
+  <!-- Table column -->
+  <g filter="url(#shadow)">
+    <rect x="470" y="85" width="390" height="340" rx="14" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+    <text x="665" y="115" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="700" fill="#15803d" text-anchor="middle">Decision Table</text>
+    <text x="665" y="135" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#475569" text-anchor="middle">Multi-row range-based matching. Slower at scale.</text>
+  </g>
+
+  <!-- Table visual -->
+  <g filter="url(#shadow)">
+    <rect x="495" y="155" width="340" height="100" rx="8" fill="#ffffff" stroke="#16a34a" stroke-width="1.5"/>
+    <!-- Header -->
+    <rect x="495" y="155" width="340" height="28" rx="8" fill="#dcfce7"/>
+    <text x="545" y="173" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#15803d" text-anchor="middle">Credit Score</text>
+    <text x="615" y="173" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#15803d" text-anchor="middle">Revenue Range</text>
+    <text x="685" y="173" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#15803d" text-anchor="middle">Risk Tier</text>
+    <text x="755" y="173" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#15803d" text-anchor="middle">APR Modifier</text>
+    <!-- Row 1 -->
+    <text x="545" y="202" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#15803d" text-anchor="middle">720+</text>
+    <text x="615" y="202" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#15803d" text-anchor="middle">$1M+</text>
+    <text x="685" y="202" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#15803d" text-anchor="middle">A</text>
+    <text x="755" y="202" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#15803d" text-anchor="middle">+0.0%</text>
+    <!-- Row 2 -->
+    <text x="545" y="228" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#15803d" text-anchor="middle">620-719</text>
+    <text x="615" y="228" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#15803d" text-anchor="middle">$500k-$999k</text>
+    <text x="685" y="228" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#15803d" text-anchor="middle">B</text>
+    <text x="755" y="228" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#15803d" text-anchor="middle">+1.5%</text>
+    <!-- Row 3 -->
+    <text x="545" y="254" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#15803d" text-anchor="middle">580-619</text>
+    <text x="615" y="254" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#15803d" text-anchor="middle">$100k-$499k</text>
+    <text x="685" y="254" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#15803d" text-anchor="middle">C</text>
+    <text x="755" y="254" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#15803d" text-anchor="middle">+3.5%</text>
+  </g>
+
+  <!-- Table properties -->
+  <g filter="url(#shadow)">
+    <rect x="495" y="270" width="340" height="140" rx="8" fill="#ffffff" stroke="#16a34a" stroke-width="1"/>
+    <text x="515" y="294" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#15803d">Input columns: 2 (Credit Score, Revenue)</text>
+    <text x="515" y="316" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#15803d">Output columns: 2 (Risk Tier, APR Mod)</text>
+    <text x="515" y="338" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#15803d">Match type: Range-based, all conditions</text>
+    <text x="515" y="360" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#15803d">Row scan: Evaluates ALL matching rows</text>
+    <text x="515" y="382" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#15803d">Performance: Degrades above 100k rows</text>
+    <text x="515" y="400" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#15803d">Use when: Multiple rows can match, need all</text>
+  </g>
+
+  <!-- Bottom comparison row -->
+  <g filter="url(#shadow)">
+    <rect x="40" y="440" width="820" height="1" rx="0" fill="#e2e8f0"/>
+  </g>
+</svg>

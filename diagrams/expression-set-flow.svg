@@ -1,0 +1,96 @@
+<svg viewBox="0 0 900 500" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-opacity="0.12"/>
+    </filter>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#64748b"/>
+    </marker>
+    <marker id="arrow-green" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#16a34a"/>
+    </marker>
+    <marker id="arrow-blue" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrow-amber" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#d97706"/>
+    </marker>
+  </defs>
+
+  <rect width="900" height="500" fill="#f8fafc"/>
+
+  <text x="450" y="32" font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="700" fill="#1e293b" text-anchor="middle">Expression Set: Step Execution Flow</text>
+  <text x="450" y="55" font-family="system-ui, -apple-system, sans-serif" font-size="13" fill="#64748b" text-anchor="middle">Steps run sequentially. Conditional Branch routes based on prior step output.</text>
+
+  <!-- Input -->
+  <g filter="url(#shadow)">
+    <rect x="320" y="82" width="260" height="48" rx="10" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+    <text x="450" y="107" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="700" fill="#6d28d9" text-anchor="middle">Input: tier, tenure_days, credit_score</text>
+    <text x="450" y="122" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#7c3aed" text-anchor="middle">Called from Apex with input map</text>
+  </g>
+
+  <!-- Arrow to first step -->
+  <line x1="450" y1="130" x2="450" y2="155" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 1: Assignment -->
+  <g filter="url(#shadow)">
+    <rect x="60" y="165" width="780" height="68" rx="10" fill="#ffffff" stroke="#6366f1" stroke-width="2"/>
+    <rect x="80" y="183" width="40" height="32" rx="6" fill="#6366f1"/>
+    <text x="100" y="204" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle">1</text>
+    <text x="130" y="197" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="700" fill="#4338ca">Assignment step</text>
+    <text x="130" y="214" font-family="system-ui" font-size="11" fill="#475569">Sets: risk_segment = "STANDARD" → "PREFERRED" if tenure_days > 90</text>
+    <text x="130" y="228" font-family="system-ui" font-size="11" fill="#16a34a">Stores result in ES variable: risk_segment</text>
+  </g>
+
+  <line x1="450" y1="233" x2="450" y2="258" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 2: Lookup Matrix -->
+  <g filter="url(#shadow)">
+    <rect x="60" y="268" width="780" height="68" rx="10" fill="#ffffff" stroke="#3b82f6" stroke-width="2"/>
+    <rect x="80" y="286" width="40" height="32" rx="6" fill="#3b82f6"/>
+    <text x="100" y="307" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle">2</text>
+    <text x="130" y="300" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="700" fill="#1e40af">Decision Matrix Lookup</text>
+    <text x="130" y="317" font-family="system-ui" font-size="11" fill="#475569">Matrix: RTB_MA_Matrix. Inputs: tier, tenure_days → MA_FACTOR, REASON_CODES</text>
+    <text x="130" y="331" font-family="system-ui" font-size="11" fill="#16a34a">Stores: ma_factor, reason_codes in ES variables</text>
+  </g>
+
+  <line x1="450" y1="336" x2="450" y2="361" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 3: Conditional Branch -->
+  <g filter="url(#shadow)">
+    <rect x="60" y="371" width="780" height="68" rx="10" fill="#ffffff" stroke="#d97706" stroke-width="2"/>
+    <rect x="80" y="389" width="40" height="32" rx="6" fill="#d97706"/>
+    <text x="100" y="410" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle">3</text>
+    <text x="130" y="403" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="700" fill="#b45309">Conditional Branch</text>
+    <text x="130" y="420" font-family="system-ui" font-size="11" fill="#475569">Condition: ma_factor == null? If true → Step 5 (No Match). If false → Step 4.</text>
+    <text x="130" y="434" font-family="system-ui" font-size="11" fill="#d97706">Routes evaluation based on ma_factor output from Step 2</text>
+  </g>
+
+  <!-- Diamond for branch -->
+  <polygon points="720,405 740,385 760,405 740,425" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text x="740" y="418" font-family="system-ui" font-size="9" fill="#b45309" text-anchor="middle">if</text>
+
+  <!-- Step 4: Output -->
+  <line x1="450" y1="439" x2="450" y2="462" stroke="#16a34a" stroke-width="2" marker-end="url(#arrow-green)"/>
+  <line x1="450" y1="462" x2="720" y2="462" stroke="#16a34a" stroke-width="2" marker-end="url(#arrow-green)"/>
+  <line x1="720" y1="462" x2="720" y2="425" stroke="#16a34a" stroke-width="2" marker-end="url(#arrow-green)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="60" y="462" width="380" height="58" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+    <rect x="80" y="480" width="40" height="32" rx="6" fill="#16a34a"/>
+    <text x="100" y="501" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle">4</text>
+    <text x="130" y="484" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="700" fill="#15803d">Assignment (output)</text>
+    <text x="130" y="501" font-family="system-ui" font-size="11" fill="#475569">Sets: final_outcome = risk_segment + ":" + ma_factor</text>
+    <text x="130" y="514" font-family="system-ui" font-size="11" fill="#16a34a">Marks ES output variable final_outcome</text>
+  </g>
+
+  <!-- Step 5: No Match path -->
+  <g filter="url(#shadow)">
+    <rect x="460" y="462" width="380" height="58" rx="10" fill="#fef2f2" stroke="#ef4444" stroke-width="2"/>
+    <rect x="480" y="480" width="40" height="32" rx="6" fill="#ef4444"/>
+    <text x="500" y="501" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle">5</text>
+    <text x="530" y="484" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="700" fill="#dc2626">No Match handler</text>
+    <text x="530" y="501" font-family="system-ui" font-size="11" fill="#475569">Sets: final_outcome = "NO_MATCH", reason_codes = "NM-001"</text>
+    <text x="530" y="514" font-family="system-ui" font-size="11" fill="#dc2626">Reached when ma_factor is null (conditional branch)</text>
+  </g>
+</svg>

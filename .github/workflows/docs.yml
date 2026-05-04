@@ -1,0 +1,39 @@
+name: docs
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Copy content to docs/
+        run: |
+          mkdir -p docs
+          cp *.md docs/ 2>/dev/null || true
+          cp -r diagrams docs/ 2>/dev/null || true
+          cp -r cookbook docs/ 2>/dev/null || true
+          cp -r templates docs/ 2>/dev/null || true
+          cp -r case-studies docs/ 2>/dev/null || true
+          cp README.md docs/index.md
+
+      - name: Build site
+        run: mkdocs build
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
